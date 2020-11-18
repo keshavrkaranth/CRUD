@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <center>
+        <h2><strong>CRUD</strong></h2>
+    </center>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <form method="post">
+                    {% csrf_token %} {{ form.as_p }}
+                    <center><input type="submit" value="Add"></center>
+                </form>
+            </div>
+            <div class="col-sm-8">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Course</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Father_Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% if details.exists %}
+                        {% for user in details %}
+                        <tr>
+                            <th scope="row">{{ user.id }}</th>
+                            <td>{{ user.Name}}</td>
+                            <td>{{ user.Course }}</td>
+                            <td>{{ user.Phone_no }}</td>
+                            <td>{{ user.FatherName }}</td>
+                            <td><button class="btn btn-danger"><a href="{% url 'crudapp:delete' user.id %}" >Delete</a></button> <button class="btn btn-primary">Edit</button></td>
+                        </tr>
+                    {% endfor %}
+
+                    {% else %}
+                        <th>No users</th>
+
+                    {% endif %}
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
