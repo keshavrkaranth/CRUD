@@ -28,4 +28,16 @@ def delete(request,id):
     obj.delete()
     return redirect('/')
 
+def edit(request,id):
+    if request.method =='POST':
+        user = Student.objects.get(id=id)
+        form = studentReg(request.POST,instance=user)
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect('/')
+    else:
+        user = Student.objects.get(id=id)
+        form=studentReg(instance=user)
+    return render(request,'edit.html',{'form':form})
+
 
