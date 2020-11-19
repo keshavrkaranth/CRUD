@@ -19,7 +19,8 @@ def Homepage(request):
 
     return render(request,'home.html',{"form":form,
                                        'details':user_details,
-                                       })
+                                       }
+                  )
 
 
 
